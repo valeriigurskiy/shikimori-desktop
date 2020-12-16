@@ -1,0 +1,15 @@
+<p>profile works!</p>
+<div *ngIf="!accessTokenResult">
+  <button *ngIf="!loginTouched" (click)="loginvia('shikimori')" type="button" class="btn btn-success">Login</button>
+  <div *ngIf="loginTouched">
+    <label>
+      <input #tokenInput/>
+    </label>
+    <button (click)="getToken(tokenInput.value)" class="btn btn-success">Send token</button>
+  </div>
+  <div *ngIf="requestValid">Error</div>
+</div>
+<div *ngIf="accessTokenResult">
+  {{currentUser.username}}
+  {{currentUser.nickname}}
+</div>
