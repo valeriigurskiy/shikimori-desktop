@@ -21,7 +21,7 @@ const routers = [
     path: 'profile', component: ProfileComponent
   },
   {
-    path: 'watch/:id/:episode', component: WatchPageComponent
+    path: 'watch/:newId/:id/:episode/:allepisodes', component: WatchPageComponent
   }]
 
 

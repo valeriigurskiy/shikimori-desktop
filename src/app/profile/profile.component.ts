@@ -4,7 +4,7 @@ import {AccessToken} from "../entity/AccessToken";
 import {WhoAmI} from "../entity/WhoAmI";
 import {Router} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
-
+import {Playerjs} from 'src/playerjs.js';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -28,10 +28,6 @@ export class ProfileComponent implements OnInit {
     } else {
       this.accessTokenResult = false;
     }
-  }
-
-  DoFullScreen() {
-
   }
 
   ngOnInit(): void {

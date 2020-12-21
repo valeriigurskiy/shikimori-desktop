@@ -78,12 +78,12 @@ export class HomePageComponent implements OnInit {
       'User-Agent': 'testingapi',
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
-    this.httpClient.post("https://shikimori.one/api/v2/user_rates/" + animeID + "/increment", '', { headers: reqHeader}).subscribe(value => console.log(value));
+    this.httpClient.post("https://shikimori.one/api/v2/user_rates/" + animeID + "/increment", '', {headers: reqHeader}).subscribe(value => console.log(value));
     setTimeout(() => window.location.reload(), 100);
   }
 
-  watchAnime(id: number, episode: number, allepisodes: number){
-    this.router.navigate(['watch', id, episode], {state: {id, episode, allepisodes}});
+  watchAnime(newId: number, id: number, episode: number, allepisodes: number) {
+    this.router.navigate(['watch', newId, id, episode, allepisodes], {state: {newId, id, episode, allepisodes}});
   }
 
   ngOnInit(): void {
@@ -94,5 +94,4 @@ export class HomePageComponent implements OnInit {
       this.userAuthorized = false;
     }
   }
-
 }
