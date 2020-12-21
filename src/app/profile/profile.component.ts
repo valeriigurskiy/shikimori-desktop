@@ -1,21 +1,24 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, HostListener, Injectable, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {AccessToken} from "../entity/AccessToken";
 import {WhoAmI} from "../entity/WhoAmI";
+import {Router} from "@angular/router";
 
-@Injectable()
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
+
 export class ProfileComponent implements OnInit {
 
+
   loginTouched: boolean = false;
-  requestValid: boolean = false;
-  currentUser: WhoAmI
+  requestValid: boolean = true;
+  currentUser: WhoAmI;
   accessTokenResult: boolean;
   currentToken: string;
+  child = window;
 
   constructor(private httpClient: HttpClient) {
     this.currentToken = localStorage.getItem("token");
@@ -30,6 +33,10 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  toShikimori(url: string){
+    window.open(url, '_blank', 'toolbar=0,menubar=0');
+  }
+
   getWhoIAm() {
     const reqHeader = new HttpHeaders({
       'User-Agent': 'testingapi',
@@ -40,23 +47,17 @@ export class ProfileComponent implements OnInit {
       this.currentUser = value
       localStorage.setItem("id", String(value.id));
     });
+
   }
 
-  getOauthDialogLink(service: string, then?: string | null) {
-    let url = `https://shikimori.one/oauth/authorize?client_id=zAKRfBZS5Ku7lB30Rwmrlr_HpAbjajHfTkPxpAtL0-I&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code`
-    if (then) {
-      url += '&state=then%3D' + encodeURIComponent(then)
-    }
-    return url;
-  }
-
-  loginvia(service: string) {
-    var win = window.open(this.getOauthDialogLink(service), '_blank', 'toolbar=0,location=0,menubar=0,height=600,width=450');
+  getToken() {
+    const url = `https://shikimori.one/oauth/authorize?client_id=zAKRfBZS5Ku7lB30Rwmrlr_HpAbjajHfTkPxpAtL0-I&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code&scope=user_rates`
+    this.child.open(url, '_blank', 'toolbar=0,location=0,menubar=0,height=600,width=450');
+    this.child.focus();
     this.loginTouched = true;
   }
 
-  getToken(token: string) {
-    console.log(token);
+  login(token: string) {
     const url = "https://shikimori.one/oauth/token";
     const httpOptions = {
       body: new HttpParams()
@@ -67,7 +68,17 @@ export class ProfileComponent implements OnInit {
         .set("code", token)
         .set("redirect_uri", "urn:ietf:wg:oauth:2.0:oob")
     };
-    this.httpClient.post<AccessToken>(url, httpOptions.body).subscribe(value => localStorage.setItem("token", value.access_token));
-    setTimeout(() => window.location.reload(), 5000);
+    this.httpClient.post<AccessToken>(url, httpOptions.body).subscribe(value => localStorage.setItem("token", value.access_token),
+      error => this.requestValid = false);
+    if (this.requestValid){
+      setTimeout(() => window.location.reload(), 500);
+    }
   }
+
+  logOut() {
+    localStorage.removeItem("id");
+    localStorage.removeItem("token");
+    setTimeout(() => window.location.reload(), 500);
+  }
+
 }

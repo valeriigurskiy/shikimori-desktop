@@ -1,15 +1,28 @@
-<p>profile works!</p>
-<div *ngIf="!accessTokenResult">
-  <button *ngIf="!loginTouched" (click)="loginvia('shikimori')" type="button" class="btn btn-success">Login</button>
+<div *ngIf="!accessTokenResult" style="text-align: center; margin-top: 30%;">
+  <button *ngIf="!loginTouched" (click)="getToken()" type="button" class="btn btn-success">Login</button>
   <div *ngIf="loginTouched">
     <label>
       <input #tokenInput/>
     </label>
-    <button (click)="getToken(tokenInput.value)" class="btn btn-success">Send token</button>
+    <br/>
+    <button (click)="login(tokenInput.value)" class="btn btn-success">Send token</button>
   </div>
-  <div *ngIf="requestValid">Error</div>
+  <div *ngIf="!requestValid">Error</div>
 </div>
 <div *ngIf="accessTokenResult">
-  {{currentUser.username}}
-  {{currentUser.nickname}}
+
+  <div style="margin-left: 450px;">
+    <img [src]="currentUser.image.x160"/>
+    <br/>
+      <div style="margin-left: 50px">
+        {{currentUser.nickname}}
+        <img style="width: 20px; height: 20px" src="https://pm1.narvii.com/6809/51fea4ba91a160f2d03ea9d1a4c694d4ffdf03b2v2_00.jpg" (click)="toShikimori(currentUser.url)"/>
+      </div>
+      <div style="margin-left: 40px">
+        <button (click)="logOut()" class="btn btn-danger">Log out</button>
+      </div>
+
+
+  </div>
 </div>
+

@@ -1,0 +1,26 @@
+.minimizeButton{
+  background:white;
+  border: none;
+  color: black;
+  text-align: center;
+  transition-duration: 0.4s;
+  outline:none;
+}
+.closeButton{
+  background:white;
+  border: none;
+  color: black;
+  text-align: center;
+  transition-duration: 0.1s;
+  outline:none;
+}
+
+.minimizeButton:hover{
+  background-color: lightgray;
+  color: black;
+}
+
+.closeButton:hover {
+  background-color: red;
+  color: black;
+}

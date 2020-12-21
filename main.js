@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, remote, ipcMain } = require('electron')
 const url = require("url");
 const path = require("path");
 
@@ -16,11 +16,10 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true
     },
+    resizable: false
   })
 
   mainWindow.setMenuBarVisibility(false);
-
-  mainWindow.webContents.openDevTools();
 
   mainWindow.loadURL(
     url.format({
@@ -33,8 +32,8 @@ function createWindow() {
   mainWindow.on('closed', function() {
     mainWindow = null
   })
-}
 
+}
 
 app.on('ready', createWindow)
 

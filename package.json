@@ -1,11 +1,24 @@
 {
   "name": "deskomori",
-  "version": "0.1.0",
+  "version": "0.0.2",
   "main": "main.js",
   "scripts": {
+    "e": "electron .",
     "eb": "ng build --prod && electron .",
-    "e": "electron ."
+    "build": "electron-packager . Deskomori"
   },
+  "browser": {
+    "http": false,
+    "https":false,
+    "net": false,
+    "path": false,
+    "stream": false,
+    "tls": false
+  },
+  "node": {
+    "fs": "empty"
+  },
+  "author": "ftplz",
   "private": true,
   "dependencies": {
     "@angular/animations": "~11.0.4",
@@ -23,7 +36,8 @@
     "bootstrap": "^4.5.0",
     "electron-packager": "^15.2.0",
     "mat-video": "^2.8.1",
-    "rxjs": "~6.6.0",
+    "material-table": "^1.69.2",
+    "rxjs": "^6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
@@ -35,6 +49,7 @@
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "electron": "^11.1.0",
+    "electron-winstaller": "^4.0.1",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.1.0",

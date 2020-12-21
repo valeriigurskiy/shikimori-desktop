@@ -1,8 +1,275 @@
-<div *ngFor="let anime of usersAnime">
-  {{anime.id}}
-  {{anime.episodes}}
+<div *ngIf="userAuthorized">
+<div class="d-flex">
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+    <li ngbNavItem="planned">
+      <a ngbNavLink (click)="getPlanned()">Planned</a>
+      <ng-template ngbNavContent>
+        <table class="table" style="min-width: 880px">
+        <thead>
+        <tr>
+          <th scope="col">Image</th>
+          <th scope="col">Title</th>
+          <th scope="col">Episodes</th>
+          <th scope="col">+1</th>
+          <th scope="col">Score</th>
+          <th scope="col">Release date</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let anime of usersAnimePlanned; index as i">
+          <th>
+            <img [src]="imageURL + anime.anime.image.x48"/>
+          </th>
+
+          <td>
+            {{anime.anime.russian}}
+            <div style="font-size: 12px">{{anime.anime.name}}</div>
+          </td>
+
+          <td>{{anime.episodes}} / {{anime.anime.episodes}}</td>
+
+          <td>
+            <button type="button" (click)="addOneEpisode(anime.id)">＋</button>
+          </td>
+
+          <td>
+            {{anime.anime.score}}
+          </td>
+
+          <td>
+            {{anime.anime.aired_on}}
+          </td>
+        </tr>
+        </tbody>
+        </table>
+      </ng-template>
+    </li>
+    <li ngbNavItem="watching">
+      <a ngbNavLink (click)="getWatching()">Watching</a>
+      <ng-template ngbNavContent>
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">Title</th>
+              <th scope="col">Episodes</th>
+              <th scope="col">+1</th>
+              <th scope="col">Score</th>
+              <th scope="col">Release date</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let anime of usersAnimeWatching; index as i">
+              <th>
+                <img [src]="imageURL + anime.anime.image.x48"/>
+              </th>
+
+              <td>
+                {{anime.anime.russian}}
+                <div style="font-size: 12px">{{anime.anime.name}}</div>
+              </td>
+
+              <td>{{anime.episodes}} / {{anime.anime.episodes}}</td>
+
+              <td>
+                <button type="button" (click)="addOneEpisode(anime.id)">＋</button>
+              </td>
+
+              <td>
+                {{anime.anime.score}}
+              </td>
+
+              <td>
+                {{anime.anime.aired_on}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+      </ng-template>
+    </li>
+    <li ngbNavItem="rewatching">
+      <a ngbNavLink (click)="getRewatching()">Rewatching</a>
+      <ng-template ngbNavContent>
+        <table class="table" style="min-width: 880px">
+          <thead>
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Episodes</th>
+            <th scope="col">+1</th>
+            <th scope="col">Score</th>
+            <th scope="col">Release date</th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let anime of usersAnimeRewatching; index as i">
+            <th>
+              <img [src]="imageURL + anime.anime.image.x48"/>
+            </th>
+
+            <td>
+              {{anime.anime.russian}}
+              <div style="font-size: 12px">{{anime.anime.name}}</div>
+            </td>
+
+            <td>{{anime.episodes}} / {{anime.anime.episodes}}</td>
+
+            <td>
+              <button type="button" (click)="addOneEpisode(anime.id)">＋</button>
+            </td>
+
+            <td>
+              {{anime.anime.score}}
+            </td>
+
+            <td>
+              {{anime.anime.aired_on}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </ng-template>
+    </li>
+    <li ngbNavItem="completed">
+      <a ngbNavLink (click)="getCompleted()">Completed</a>
+      <ng-template ngbNavContent>
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Episodes</th>
+            <th scope="col">Score</th>
+            <th scope="col">Release date</th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let anime of usersAnimeCompleted">
+            <th>
+              <img [src]="imageURL + anime.anime.image.x48"/>
+            </th>
+
+            <td>
+              {{anime.anime.russian}}
+              <div style="font-size: 12px">{{anime.anime.name}}</div>
+            </td>
+
+            <td>{{anime.episodes}} / {{anime.anime.episodes}}</td>
+
+            <td>
+              {{anime.anime.score}}
+            </td>
+
+            <td>
+              {{anime.anime.aired_on}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </ng-template>
+    </li>
+    <li ngbNavItem="on_hold">
+      <a ngbNavLink (click)="getOnHold()">On hold</a>
+      <ng-template ngbNavContent>
+        <table class="table" style="min-width: 880px">
+          <thead>
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Episodes</th>
+            <th scope="col">+1</th>
+            <th scope="col">Score</th>
+            <th scope="col">Release date</th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let anime of usersAnimeOnHold; index as i">
+            <th>
+              <img [src]="imageURL + anime.anime.image.x48"/>
+            </th>
+
+            <td>
+              {{anime.anime.russian}}
+              <div style="font-size: 12px">{{anime.anime.name}}</div>
+            </td>
+
+            <td>{{anime.episodes}} / {{anime.anime.episodes}}</td>
+
+            <td>
+              <button type="button" (click)="addOneEpisode(anime.id)">＋</button>
+            </td>
+
+            <td>
+              {{anime.anime.score}}
+            </td>
+
+            <td>
+              {{anime.anime.aired_on}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </ng-template>
+    </li>
+    <li ngbNavItem="dropped">
+      <a ngbNavLink (click)="getDropped()">Dropped</a>
+      <ng-template ngbNavContent>
+        <table class="table" style="min-width: 880px">
+          <thead>
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Episodes</th>
+            <th scope="col">+1</th>
+            <th scope="col">Score</th>
+            <th scope="col">Release date</th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let anime of usersAnimeDropped; index as i">
+            <th>
+              <img [src]="imageURL + anime.anime.image.x48"/>
+            </th>
+
+            <td>
+              {{anime.anime.russian}}
+              <div style="font-size: 12px">{{anime.anime.name}}</div>
+            </td>
+
+            <td>{{anime.episodes}} / {{anime.anime.episodes}}</td>
+
+            <td>
+              <button type="button" (click)="addOneEpisode(anime.id)">＋ </button>
+            </td>
+
+            <td>
+              {{anime.anime.score}}
+            </td>
+
+            <td>
+              {{anime.anime.aired_on}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="ml-4"></div>
+</div>
 </div>
 
-<div>
-
+<div *ngIf="!userAuthorized">
+  <div style="text-align: center; margin-top: 25%">
+    You must be authorized
+    <br/>
+    <button routerLink="/profile" class="btn btn-outline-dark">Authorize</button>
+  </div>
 </div>

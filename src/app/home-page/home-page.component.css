@@ -1,0 +1,17 @@
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+td {
+  word-wrap: break-word;
+}
+
+button{
+  background:white;
+  color: black;
+  text-align: center;
+  outline:none;
+  border: 1px solid black;
+  width: 35px;
+  height: 35px;
+}

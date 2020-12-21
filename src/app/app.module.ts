@@ -4,12 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app/app.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HeaderComponent } from './header/header.component';
-import {Router, RouterModule} from "@angular/router";
+import {Router, RouterModule, Routes} from "@angular/router";
 import { HomePageComponent } from './home-page/home-page.component';
 import {HttpClientModule} from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {OAuthModule} from "angular-oauth2-oidc";
-import {Location} from "@angular/common";
+import {HashLocationStrategy, Location, LocationStrategy} from "@angular/common";
 
 const routers = [
   {
@@ -17,6 +17,9 @@ const routers = [
   },
   {
     path: 'profile', component: ProfileComponent
+  },
+  {
+    path: 'login', redirectTo: 'profile'
   }]
 
 
@@ -33,10 +36,15 @@ const routers = [
     RouterModule.forRoot(routers),
     NgbModule,
     RouterModule,
-    OAuthModule.forRoot()
+
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

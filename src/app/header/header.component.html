@@ -1,14 +1,12 @@
-<div class="d-flex" style="margin-top: 45vh;">
-  <ul ngbNav #nav="ngbNav" class="nav-pills" orientation="vertical">
+<div class="d-flex" style="border-bottom: 1px solid black">
+  <ul ngbNav #nav="ngbNav" class="alert-link" orientation="horizontal">
     <li ngbNavItem="home">
       <a ngbNavLink routerLink="/">List</a>
     </li>
     <li ngbNavItem="profile">
       <a ngbNavLink routerLink="/profile">Profile</a>
     </li>
-
   </ul>
-
   <div [ngbNavOutlet]="nav" class="ml-4"></div>
 </div>
 
