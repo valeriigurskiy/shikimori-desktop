@@ -7,16 +7,12 @@ let mainWindow
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1024,
-    minWidth: 1024,
-    maxWidth: 1024,
     height: 768,
-    minHeight: 768,
-    maxHeight: 768,
     maximizable: false,
+    resizable: false,
     webPreferences: {
       nodeIntegration: true
-    },
-    resizable: false
+    }
   })
 
   mainWindow.setMenuBarVisibility(false);

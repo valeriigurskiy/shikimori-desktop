@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Anime} from "../entity/Anime";
 import {GlobalAnime} from "../entity/GlobalAnime";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home-page',
@@ -22,7 +23,7 @@ export class HomePageComponent implements OnInit {
 
   userAuthorized: boolean;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private router: Router) {
   }
 
   getPlanned() {
@@ -68,7 +69,6 @@ export class HomePageComponent implements OnInit {
   }
 
   addOneEpisode(animeID: number) {
-
     const httpOptions = {
       body: new HttpParams()
         .set("User-Agent", "testingapi")
@@ -80,6 +80,10 @@ export class HomePageComponent implements OnInit {
     });
     this.httpClient.post("https://shikimori.one/api/v2/user_rates/" + animeID + "/increment", '', { headers: reqHeader}).subscribe(value => console.log(value));
     setTimeout(() => window.location.reload(), 100);
+  }
+
+  watchAnime(id: number, episode: number, allepisodes: number){
+    this.router.navigate(['watch', id, episode], {state: {id, episode, allepisodes}});
   }
 
   ngOnInit(): void {

@@ -10,6 +10,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {OAuthModule} from "angular-oauth2-oidc";
 import {HashLocationStrategy, Location, LocationStrategy} from "@angular/common";
+import { WatchPageComponent } from './watch-page/watch-page.component';
+import {FormsModule} from "@angular/forms";
 
 const routers = [
   {
@@ -19,7 +21,7 @@ const routers = [
     path: 'profile', component: ProfileComponent
   },
   {
-    path: 'login', redirectTo: 'profile'
+    path: 'watch/:id/:episode', component: WatchPageComponent
   }]
 
 
@@ -28,7 +30,8 @@ const routers = [
     AppComponent,
     ProfileComponent,
     HeaderComponent,
-    HomePageComponent
+    HomePageComponent,
+    WatchPageComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ const routers = [
     RouterModule.forRoot(routers),
     NgbModule,
     RouterModule,
+    FormsModule,
 
 
   ],

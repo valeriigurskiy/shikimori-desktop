@@ -1,0 +1,62 @@
+<!--<div id="visor-video">-->
+<!--  <iframe width="900" height="600" allowfullscreen-->
+<!--          src="https://aniqit.com/seria/176513/ef19b80b1927930ed84837c466e69bcd/720p?translations=false">-->
+<!--  </iframe>-->
+<!--  <div *ngFor="let result of translatorsName">-->
+<!--    {{result.name}}-->
+<!--  </div>-->
+
+<!--<div *ngIf="loaded">-->
+<!--  <select [(ngModel)]="selectedValue">-->
+<!--    <option *ngFor="let c of translatorsName" [ngValue]="c" selected>{{c.name}}</option>-->
+<!--  </select>-->
+
+<!--  <select [(ngModel)]="selectedValue2">-->
+<!--    <option *ngFor="let c of selectedValue.translations" [ngValue]="c.url" selected>{{c.name}}</option>-->
+<!--  </select>-->
+<!--</div>-->
+
+<div *ngIf="loaded">
+  <div style="display: flex; font-size: 14px">
+    <div>
+      <div *ngFor="let anime of translatorsName" style="justify-content: flex-end; max-width: 600px">
+        <h5><span class="badge badge-secondary">{{anime.name}}</span></h5>
+        <div *ngFor="let animeSourceTitle of anime.translations">
+          <button (click)="sendURL(animeSourceTitle.url)">
+            {{animeSourceTitle.name}}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="urlSelect"  style="margin-left: 55px">
+      <iframe width="1070" height="621" allowfullscreen
+              [src]="sanitizer.bypassSecurityTrustResourceUrl(takeURL())">
+      </iframe>
+    </div>
+<!--    <p>-->
+<!--      <button type="button" class="btn btn-outline-primary" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"-->
+<!--              aria-controls="collapseExample">-->
+<!--        Toggle-->
+<!--      </button>-->
+<!--    </p>-->
+<!--    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">-->
+<!--      <div class="card">-->
+<!--        <div class="card-body">-->
+<!--          <div *ngFor="let anime of translatorsName">-->
+<!--            {{anime.name}}-->
+<!--            <div *ngFor="let animeSourceTitle of anime.translations">-->
+<!--              <button (click)="sendURL(animeSourceTitle.url)">-->
+<!--                {{animeSourceTitle.name}}-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+  </div>
+</div>
+
+<div *ngIf="!loaded">
+  please wait
+</div>

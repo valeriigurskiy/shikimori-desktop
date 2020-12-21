@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {AccessToken} from "../entity/AccessToken";
 import {WhoAmI} from "../entity/WhoAmI";
 import {Router} from "@angular/router";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-profile',
@@ -19,8 +20,7 @@ export class ProfileComponent implements OnInit {
   accessTokenResult: boolean;
   currentToken: string;
   child = window;
-
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private sanitizer: DomSanitizer) {
     this.currentToken = localStorage.getItem("token");
     if (localStorage.getItem("token")) {
       this.accessTokenResult = true;
@@ -28,6 +28,10 @@ export class ProfileComponent implements OnInit {
     } else {
       this.accessTokenResult = false;
     }
+  }
+
+  DoFullScreen() {
+
   }
 
   ngOnInit(): void {
