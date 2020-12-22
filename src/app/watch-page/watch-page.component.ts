@@ -20,7 +20,7 @@ export class WatchPageComponent implements OnInit {
   urlSelect: boolean = false;
   currentURL: string;
   selectedValue;
-  updatedEpisode: number;
+  imageByDefault: string = "https://webgate.24guru.by/uploads/events/thumbs/880x550/4yC02J1FF.jpg";
 
   constructor(private activatedRoute: ActivatedRoute, private httpClient: HttpClient, public sanitizer: DomSanitizer, private router: Router) {
     this.activatedRoute.params.subscribe((params: Params) => {

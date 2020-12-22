@@ -12,7 +12,7 @@
           <th scope="col">Episodes</th>
           <th scope="col">+1</th>
           <th scope="col">Score</th>
-          <th scope="col">Release date</th>
+          <th scope="col">Watch</th>
 
         </tr>
         </thead>
@@ -30,7 +30,7 @@
           <td>{{anime.episodes}} / {{anime.anime.episodes}}</td>
 
           <td>
-            <button type="button" (click)="addOneEpisode(anime.id)">＋</button>
+            <button class="incrementButton" (click)="addOneEpisode(anime.id, content)">＋</button>
           </td>
 
           <td>
@@ -38,7 +38,7 @@
           </td>
 
           <td>
-            {{anime.anime.aired_on}}
+            <button class="watchButton" (click)="watchAnime(anime.id, anime.anime.id, anime.episodes+1, anime.anime.episodes)">Watch</button>
           </td>
         </tr>
         </tbody>
@@ -56,7 +56,7 @@
               <th scope="col">Episodes</th>
               <th scope="col">+1</th>
               <th scope="col">Score</th>
-              <th scope="col">Release date</th>
+              <th scope="col">Watch</th>
 
             </tr>
             </thead>
@@ -74,7 +74,7 @@
               <td>{{anime.episodes}} / {{anime.anime.episodes}}</td>
 
               <td>
-                <button class="incrementButton" (click)="addOneEpisode(anime.id)">＋</button>
+                <button class="incrementButton" (click)="addOneEpisode(anime.id, content)">＋</button>
               </td>
 
               <td>
@@ -100,7 +100,7 @@
             <th scope="col">Episodes</th>
             <th scope="col">+1</th>
             <th scope="col">Score</th>
-            <th scope="col">Release date</th>
+            <th scope="col">Watch</th>
 
           </tr>
           </thead>
@@ -118,7 +118,7 @@
             <td>{{anime.episodes}} / {{anime.anime.episodes}}</td>
 
             <td>
-              <button type="button" (click)="addOneEpisode(anime.id)">＋</button>
+              <button type="button" (click)="addOneEpisode(anime.id, content)">＋</button>
             </td>
 
             <td>
@@ -126,7 +126,7 @@
             </td>
 
             <td>
-              {{anime.anime.aired_on}}
+              <button class="watchButton" (click)="watchAnime(anime.id, anime.anime.id, anime.episodes+1, anime.anime.episodes)">Watch</button>
             </td>
           </tr>
           </tbody>
@@ -143,7 +143,7 @@
             <th scope="col">Title</th>
             <th scope="col">Episodes</th>
             <th scope="col">Score</th>
-            <th scope="col">Release date</th>
+            <th scope="col">Watch</th>
 
           </tr>
           </thead>
@@ -165,7 +165,7 @@
             </td>
 
             <td>
-              {{anime.anime.aired_on}}
+              <button class="watchButton" (click)="watchAnime(anime.id, anime.anime.id, anime.episodes+1, anime.anime.episodes)">Watch</button>
             </td>
           </tr>
           </tbody>
@@ -183,7 +183,7 @@
             <th scope="col">Episodes</th>
             <th scope="col">+1</th>
             <th scope="col">Score</th>
-            <th scope="col">Release date</th>
+            <th scope="col">Watch</th>
 
           </tr>
           </thead>
@@ -209,7 +209,7 @@
             </td>
 
             <td>
-              {{anime.anime.aired_on}}
+              <button class="watchButton" (click)="watchAnime(anime.id, anime.anime.id, anime.episodes+1, anime.anime.episodes)">Watch</button>
             </td>
           </tr>
           </tbody>
@@ -227,7 +227,7 @@
             <th scope="col">Episodes</th>
             <th scope="col">+1</th>
             <th scope="col">Score</th>
-            <th scope="col">Release date</th>
+            <th scope="col">Watch</th>
 
           </tr>
           </thead>
@@ -253,7 +253,7 @@
             </td>
 
             <td>
-              {{anime.anime.aired_on}}
+              <button class="watchButton" (click)="watchAnime(anime.id, anime.anime.id, anime.episodes+1, anime.anime.episodes)">Watch</button>
             </td>
           </tr>
           </tbody>
@@ -264,6 +264,25 @@
 
   <div [ngbNavOutlet]="nav" class="ml-4"></div>
 </div>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Update authentication token</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-append" style="justify-content: center">
+              <button class="btn btn-outline-secondary calendar" (click)="updateToken()" type="button">Refresh token</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-template>
 </div>
 
 <div *ngIf="!userAuthorized">

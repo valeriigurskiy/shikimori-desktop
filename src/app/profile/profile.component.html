@@ -11,7 +11,7 @@
 </div>
 <div *ngIf="accessTokenResult">
 
-  <div style="margin-left: 450px;">
+  <div style="margin-left: 600px;">
     <img [src]="currentUser.image.x160"/>
     <br/>
       <div style="margin-left: 50px">
@@ -24,9 +24,3 @@
 
   </div>
 </div>
-
-<div id="player"></div>
-<script src="playerjs.js" type="text/javascript"></script>
-<script>
-  var player = new Playerjs({id:"player", file:"https://video.sibnet.ru/shell.php?videoid=3064109"});
-</script>

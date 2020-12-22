@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Anime} from "../entity/Anime";
 import {GlobalAnime} from "../entity/GlobalAnime";
 import {Router} from "@angular/router";
+import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AccessToken} from "../entity/AccessToken";
 
 @Component({
   selector: 'app-home-page',
@@ -20,10 +22,12 @@ export class HomePageComponent implements OnInit {
   usersAnimeOnHold: GlobalAnime;
   usersAnimeDropped: GlobalAnime;
   imageURL: string = "https://dere.shikimori.one/"
-
+  tokenValid: boolean;
   userAuthorized: boolean;
+  closeResult = '';
+  contentik: TemplateRef<any>;
 
-  constructor(private httpClient: HttpClient, private router: Router) {
+  constructor(private httpClient: HttpClient, private router: Router, private modalService: NgbModal) {
   }
 
   getPlanned() {
@@ -68,7 +72,7 @@ export class HomePageComponent implements OnInit {
       });
   }
 
-  addOneEpisode(animeID: number) {
+  addOneEpisode(animeID: number, content?) {
     const httpOptions = {
       body: new HttpParams()
         .set("User-Agent", "testingapi")
@@ -78,8 +82,48 @@ export class HomePageComponent implements OnInit {
       'User-Agent': 'testingapi',
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
-    this.httpClient.post("https://shikimori.one/api/v2/user_rates/" + animeID + "/increment", '', {headers: reqHeader}).subscribe(value => console.log(value));
-    setTimeout(() => window.location.reload(), 100);
+    this.httpClient.post("https://shikimori.one/api/v2/user_rates/" + animeID + "/increment", '', {headers: reqHeader})
+      .subscribe(value => {
+        setTimeout(() => window.location.reload());
+      },
+      error => {
+        this.openModal(content);
+      });
+  }
+
+  openModal(content) {
+    console.log(content);
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${HomePageComponent.getDismissReason(reason)}`;
+    });
+  }
+
+  private static getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  updateToken(){
+    const url = "https://shikimori.one/oauth/token";
+    const httpOptions = {
+      body: new HttpParams()
+        .set("User-Agent", "testingapi")
+        .set("grant_type", "refresh_token")
+        .set("client_id", "zAKRfBZS5Ku7lB30Rwmrlr_HpAbjajHfTkPxpAtL0-I")
+        .set("client_secret", "BxkNy_NbP-b2qSF786wZKGFenUrf4fm60aDCXX9FrKU")
+        .set("refresh_token", localStorage.getItem("refresh_token"))
+    };
+    this.httpClient.post<AccessToken>(url, httpOptions.body).subscribe(value => {
+      localStorage.setItem("token", value.access_token);
+      localStorage.setItem("refresh_token", value.refresh_token);
+    })
   }
 
   watchAnime(newId: number, id: number, episode: number, allepisodes: number) {

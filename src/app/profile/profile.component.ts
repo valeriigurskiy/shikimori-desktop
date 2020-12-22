@@ -68,7 +68,10 @@ export class ProfileComponent implements OnInit {
         .set("code", token)
         .set("redirect_uri", "urn:ietf:wg:oauth:2.0:oob")
     };
-    this.httpClient.post<AccessToken>(url, httpOptions.body).subscribe(value => localStorage.setItem("token", value.access_token),
+    this.httpClient.post<AccessToken>(url, httpOptions.body).subscribe(value => {
+        localStorage.setItem("token", value.access_token);
+        localStorage.setItem("refresh_token", value.refresh_token);
+      },
       error => this.requestValid = false);
     if (this.requestValid){
       setTimeout(() => window.location.reload(), 500);

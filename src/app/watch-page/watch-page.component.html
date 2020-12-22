@@ -4,18 +4,17 @@
       <div *ngFor="let anime of translatorsName" style="justify-content: flex-end; max-width: 600px">
         <h5><span class="badge badge-secondary">{{anime.name}}</span></h5>
         <div *ngFor="let animeSourceTitle of anime.translations">
-          <button (click)="sendURL(animeSourceTitle.url)">
-            {{animeSourceTitle.name}}
-          </button>
+          <button (click)="sendURL(animeSourceTitle.url)">{{animeSourceTitle.name}}</button>
         </div>
       </div>
     </div>
-    <div *ngIf="urlSelect"  style="margin-left: 40px">
-      <iframe width="1040" height="610" allowfullscreen
+    <div style="margin-left: 40px">
+      <iframe width="1040" height="610" allowfullscreen *ngIf="urlSelect"
               [src]="sanitizer.bypassSecurityTrustResourceUrl(takeURL())">
       </iframe>
+      <img style="width: 1040px; height: 610px" [src]="imageByDefault" *ngIf="!urlSelect"/>
     </div>
-    <div style="margin-left: 30px;" *ngIf="urlSelect">
+    <div style="margin-left: 30px;">
         <h3>{{episode}} / {{allepisodes}}</h3>
       <button type="button" class="btn btn-dark" style="margin-left: 30px;" (click)="addOneEpisode()">+</button>
     </div>
