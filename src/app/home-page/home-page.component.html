@@ -74,7 +74,7 @@
               <td>{{anime.episodes}} / {{anime.anime.episodes}}</td>
 
               <td>
-                <button class="incrementButton" (click)="addOneEpisode(anime.id, content)">＋</button>
+                <button class="incrementButton" (click)="addOneEpisode(anime.id, content); anime.episodes+1">＋</button>
               </td>
 
               <td>

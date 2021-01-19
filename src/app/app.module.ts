@@ -36,7 +36,8 @@ const routers = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(routers),
+    RouterModule.forRoot(routers,
+      { scrollPositionRestoration: 'disabled' }),
     NgbModule,
     RouterModule,
     FormsModule,

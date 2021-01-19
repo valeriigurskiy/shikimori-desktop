@@ -17,7 +17,7 @@ function createWindow() {
   })
 
   mainWindow.setMenuBarVisibility(false);
-
+  mainWindow.webContents.openDevTools();
   mainWindow.loadURL(
     url.format({
       pathname: path.join(__dirname, `/dist/index.html`),

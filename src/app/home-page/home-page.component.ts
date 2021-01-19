@@ -1,10 +1,11 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Anime} from "../entity/Anime";
 import {GlobalAnime} from "../entity/GlobalAnime";
 import {Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AccessToken} from "../entity/AccessToken";
+import {ViewportScroller} from "@angular/common";
 
 @Component({
   selector: 'app-home-page',
@@ -25,9 +26,16 @@ export class HomePageComponent implements OnInit {
   tokenValid: boolean;
   userAuthorized: boolean;
   closeResult = '';
-  contentik: TemplateRef<any>;
 
-  constructor(private httpClient: HttpClient, private router: Router, private modalService: NgbModal) {
+  constructor(private httpClient: HttpClient, private router: Router, private modalService: NgbModal, private pv: ViewportScroller) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
+
+  reloadComponent() {
+    let currentUrl = this.router.url;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([currentUrl]);
   }
 
   getPlanned() {
@@ -56,6 +64,7 @@ export class HomePageComponent implements OnInit {
       (value: GlobalAnime) => {
         this.usersAnimeCompleted = value;
       });
+
   }
 
   getOnHold() {
@@ -84,7 +93,9 @@ export class HomePageComponent implements OnInit {
     });
     this.httpClient.post("https://shikimori.one/api/v2/user_rates/" + animeID + "/increment", '', {headers: reqHeader})
       .subscribe(value => {
-        setTimeout(() => window.location.reload());
+        const currentYOffset = window.pageYOffset;
+        this.reloadComponent();
+        this.pv.scrollToPosition([0, currentYOffset]);
       },
       error => {
         this.openModal(content);
@@ -118,7 +129,7 @@ export class HomePageComponent implements OnInit {
         .set("grant_type", "refresh_token")
         .set("client_id", "zAKRfBZS5Ku7lB30Rwmrlr_HpAbjajHfTkPxpAtL0-I")
         .set("client_secret", "BxkNy_NbP-b2qSF786wZKGFenUrf4fm60aDCXX9FrKU")
-        .set("refresh_token", localStorage.getItem("refresh_token"))
+        .set("refresh_token", "henLyyJFdUyV314-ZefjgqzRAoYeIhZUm6ZGt3d10bY")
     };
     this.httpClient.post<AccessToken>(url, httpOptions.body).subscribe(value => {
       localStorage.setItem("token", value.access_token);

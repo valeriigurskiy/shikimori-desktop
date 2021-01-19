@@ -9,14 +9,14 @@
       </div>
     </div>
     <div style="margin-left: 40px">
-      <iframe width="1040" height="610" allowfullscreen *ngIf="urlSelect"
+      <iframe width="693" height="406" allowfullscreen *ngIf="urlSelect"
               [src]="sanitizer.bypassSecurityTrustResourceUrl(takeURL())">
       </iframe>
-      <img style="width: 1040px; height: 610px" [src]="imageByDefault" *ngIf="!urlSelect"/>
+      <img style="width: 693px; height: 406px" [src]="imageByDefault" *ngIf="!urlSelect"/>
     </div>
     <div style="margin-left: 30px;">
-        <h3>{{episode}} / {{allepisodes}}</h3>
-      <button type="button" class="btn btn-dark" style="margin-left: 30px;" (click)="addOneEpisode()">+</button>
+        <h5>{{episode}} / {{allepisodes}}</h5>
+      <button type="button" class="btn btn-dark" style="margin-left: 15px;" (click)="addOneEpisode()">+</button>
     </div>
   </div>
 </div>
