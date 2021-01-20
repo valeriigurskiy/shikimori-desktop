@@ -67,6 +67,10 @@ export class HomePageComponent implements OnInit {
 
   }
 
+  toSingleAnimePage(id){
+    this.router.navigate(['anime', id]);
+  }
+
   getOnHold() {
     this.httpClient.get<GlobalAnime>("https://shikimori.one/api/users/" + localStorage.getItem("id") + "/anime_rates?status=on_hold&limit=200").subscribe(
       (value: GlobalAnime) => {

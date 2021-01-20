@@ -4,14 +4,14 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app/app.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HeaderComponent } from './header/header.component';
-import {Router, RouterModule, Routes} from "@angular/router";
+import {RouterModule} from "@angular/router";
 import { HomePageComponent } from './home-page/home-page.component';
 import {HttpClientModule} from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {OAuthModule} from "angular-oauth2-oidc";
-import {HashLocationStrategy, Location, LocationStrategy} from "@angular/common";
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import { WatchPageComponent } from './watch-page/watch-page.component';
 import {FormsModule} from "@angular/forms";
+import { SingleAnimePageComponent } from './single-anime-page/single-anime-page.component';
 
 const routers = [
   {
@@ -22,6 +22,9 @@ const routers = [
   },
   {
     path: 'watch/:newId/:id/:episode/:allepisodes', component: WatchPageComponent
+  },
+  {
+    path: 'anime/:id', component: SingleAnimePageComponent
   }]
 
 
@@ -31,7 +34,8 @@ const routers = [
     ProfileComponent,
     HeaderComponent,
     HomePageComponent,
-    WatchPageComponent
+    WatchPageComponent,
+    SingleAnimePageComponent
   ],
   imports: [
     BrowserModule,
@@ -41,8 +45,6 @@ const routers = [
     NgbModule,
     RouterModule,
     FormsModule,
-
-
   ],
   providers: [
     {

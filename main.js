@@ -7,8 +7,8 @@ let mainWindow
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1440,
-    height: 900,
+    width: 1280,
+    height: 720,
     maximizable: false,
     resizable: false,
     webPreferences: {
@@ -17,7 +17,7 @@ function createWindow() {
   })
 
   mainWindow.setMenuBarVisibility(false);
-  mainWindow.webContents.openDevTools();
+
   mainWindow.loadURL(
     url.format({
       pathname: path.join(__dirname, `/dist/index.html`),

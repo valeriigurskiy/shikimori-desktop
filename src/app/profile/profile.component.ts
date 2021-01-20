@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
   accessTokenResult: boolean;
   currentToken: string;
   child = window;
-  constructor(private httpClient: HttpClient, private sanitizer: DomSanitizer) {
+  constructor(private httpClient: HttpClient, private sanitizer: DomSanitizer, private router: Router) {
     this.currentToken = localStorage.getItem("token");
     if (localStorage.getItem("token")) {
       this.accessTokenResult = true;

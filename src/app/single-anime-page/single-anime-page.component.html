@@ -1,0 +1,19 @@
+<div>
+  name{{anime.name}}
+  russian{{anime.russian}}
+  original{{anime.image.original}}
+  url{{anime.url}}
+  kind{{anime.kind}}
+  score{{anime.score}}
+  status{{anime.status}}
+  episodes{{anime.episodes}}
+  episodes_aired{{anime.episodes_aired}}
+  aired_on{{anime.aired_on}}
+  released_on{{anime.released_on}}
+  rating{{anime.rating}}
+  {{anime.episodes_aired}}
+  <div *ngFor="let score of anime.rates_scores_stats">
+    {{score.value}}
+    {{score.name}}
+  </div>
+</div>

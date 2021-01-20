@@ -1,13 +1,13 @@
-<div *ngIf="!accessTokenResult" style="text-align: center; margin-top: 30%;">
-  <button *ngIf="!loginTouched" (click)="getToken()" type="button" class="btn btn-success">Login</button>
+<div *ngIf="!accessTokenResult" style="text-align: center; margin-top: 25%;">
+  <button *ngIf="!loginTouched" (click)="getToken()" type="button" class="btn btn-success">Войти</button>
   <div *ngIf="loginTouched">
     <label>
       <input #tokenInput/>
     </label>
     <br/>
-    <button (click)="login(tokenInput.value)" class="btn btn-success">Send token</button>
+    <button (click)="login(tokenInput.value)" class="btn btn-success">Отправить токен</button>
   </div>
-  <div *ngIf="!requestValid">Error</div>
+  <div *ngIf="!requestValid">Ошибка</div>
 </div>
 <div *ngIf="accessTokenResult">
 
@@ -19,7 +19,7 @@
         <img style="width: 20px; height: 20px" src="https://pm1.narvii.com/6809/51fea4ba91a160f2d03ea9d1a4c694d4ffdf03b2v2_00.jpg" (click)="toShikimori(currentUser.url)"/>
       </div>
       <div style="margin-left: 40px">
-        <button (click)="logOut()" class="btn btn-danger">Log out</button>
+        <button (click)="logOut()" class="btn btn-danger">Выйти</button>
       </div>
 
   </div>

@@ -33,15 +33,11 @@
     "@cliqz/adblocker-electron": "^1.19.0",
     "@ng-bootstrap/ng-bootstrap": "^8.0.0",
     "angular-material": "^1.2.1",
-    "angular-oauth2-oidc": "^10.0.3",
     "bootstrap": "^4.5.0",
-    "cross-fetch": "^3.0.6",
     "electron-packager": "^15.2.0",
-    "mat-video": "^2.8.1",
     "material-table": "^1.69.2",
     "rxjs": "^6.6.3",
-    "tslib": "^2.0.0",
-    "zone.js": "~0.10.2"
+    "tslib": "^2.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1100.4",
